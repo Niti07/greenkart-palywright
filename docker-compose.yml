@@ -1,0 +1,16 @@
+services:
+  tests:
+    build: .
+    ipc: host
+    volumes:
+      - ./playwright-report:/app/playwright-report
+      - ./test-results:/app/test-results
+
+  report:
+    build: .
+    ipc: host
+    volumes:
+      - ./playwright-report:/app/playwright-report
+    ports:
+      - '9323:9323'
+    command: ['npx', 'playwright', 'show-report', '--host', '0.0.0.0']

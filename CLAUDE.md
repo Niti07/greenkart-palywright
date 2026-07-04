@@ -22,6 +22,16 @@ reachable and its markup/behavior remaining stable.
 
 There is no lint, typecheck, or build script configured in `package.json`.
 
+### Running via Docker (no Node/Playwright install required)
+
+The image is pinned to `mcr.microsoft.com/playwright:v1.59.1-jammy` to match the
+`@playwright/test` version resolved in `package-lock.json` — keep these in sync if the
+dependency is upgraded.
+
+- Run the suite: `docker compose run --rm tests`
+- View the HTML report (serves on http://localhost:9323): `docker compose run --rm --service-ports report`
+- Both services mount `./playwright-report` and `./test-results` so output lands on the host.
+
 ## Architecture
 
 - `playwright.config.ts` — single project (`chromium`/Desktop Chrome). `fullyParallel: true`;
