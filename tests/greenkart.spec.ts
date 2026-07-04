@@ -11,7 +11,7 @@ test.describe('GreenKart E2E Tests', () => {
     
     // Wait for the filtered results to appear
     // The product card should be visible
-    const product = page.locator('.product').filter({ hasText: 'Cucumber' });
+    const product = page.locator('.products .product').filter({ hasText: 'Cucumber' });
     await expect(product).toBeVisible();
     await expect(product.locator('h4.product-name')).toContainText('Cucumber');
 
@@ -52,8 +52,10 @@ test.describe('GreenKart E2E Tests', () => {
     // Search for "ca" to get multiple results (e.g., Cauliflower, Carrot, Cashews)
     await page.locator('input.search-keyword').fill('ca');
     
-    const products = page.locator('.product');
-    await expect(products).toHaveCount(4); // Cauliflower, Carrots, Capsicum, Cashews
+    // Scoped to `.products .product` because the cart price-summary widget
+    // (`.showPriceWrapper`) also carries the `.product` class outside that container.
+    const products = page.locator('.products .product');
+    await expect(products).toHaveCount(4); // Cauliflower, Carrot, Capsicum, Cashews
 
     // Add first two items
     await products.nth(0).getByRole('button', { name: 'ADD TO CART' }).click();
