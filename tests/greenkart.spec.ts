@@ -71,4 +71,5 @@ test.describe('GreenKart E2E Tests', () => {
     
     await expect(page.locator('tbody tr')).toHaveCount(2);
   });
+
 });
