@@ -1,0 +1,12 @@
+{
+  "name": "greenkart-playwright",
+  "version": "1.0.0",
+  "description": "Playwright tests for GreenKart",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.1"
+  }
+}
